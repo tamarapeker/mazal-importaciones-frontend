@@ -1,0 +1,32 @@
+.headerToolbar {
+    background-color: #008037;
+    display: flex;
+    justify-content: space-between;
+}
+
+.imageHeader {
+    width: 30%;
+    margin: 10px 5px;
+}
+
+.searchHeader{
+    width: 30%;
+    background-color: #008037;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.inputHeader{
+    width: 90%;
+    padding-left: 10px;
+    background-color: #fff;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.searchIconHeader {
+    margin-left: 1% !important;
+}
