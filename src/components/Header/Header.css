@@ -1,0 +1,72 @@
+.gridHeader{
+    display: flex;
+    flex-direction: row;
+    padding: 10px 1px;
+}
+
+.headerToolbar {
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.imageHeader {
+    width: 55%;
+    margin: 20px 5px;
+}
+
+.menuOptHeader{
+    color: black;
+}
+
+.menuOptContHeader{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.contactInfoGridHeader{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.gridBottomBarHeader{
+    background-color: #008037;
+    padding: 10px 5px;
+}
+
+.menuHamGridHeader{
+    color: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.searchGridHeader{
+    display: flex;
+    justify-content: center;
+}
+
+.searchHeader{
+    background-color: #fff;
+    width: 70%;
+    border-radius: 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.inputHeader{
+    width: 90%;
+    padding-left: 10px;
+}
+
+.searchIconHeader {
+    margin-left: 1% !important;
+}
+
+.linkHeader{
+    text-decoration: none;
+}

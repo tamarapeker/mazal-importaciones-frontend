@@ -3,7 +3,7 @@ import { AppBar, Toolbar, InputBase, IconButton, Typography } from '@material-ui
 import { Card, CardBody, Tooltip, Row, Col } from 'reactstrap';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import logoMazal from '../logo-mazal.png'
+import logoMazal from '../../images/logoMazal.png'
 import './PageInContruction.css'
 
 function PageInContruction(){
