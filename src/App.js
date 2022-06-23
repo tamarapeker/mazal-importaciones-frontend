@@ -1,14 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
-import Header from './components/Header/Header';
 import PageInContruction from './components/pageInContruction/PageInContruction';
-import IndexView from './components/IndexView/IndexView';
+import MainView from './components/MainView/MainView';
+import Subcategory from './components/Subcategory/Subcategory'
+import ProductDetail from './components/ProductDetail/ProductDetail';
 
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
-  Link,
   Routes
 } from "react-router-dom";
 
@@ -17,7 +15,9 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-            <Route exact path="/home" element={<IndexView />}/>
+            <Route exact path="/home" element={<MainView />}/>
+            <Route exact path="/subcategory/:cateogry" element={<Subcategory />}/>
+            <Route exact path="/product/:subcategory" element={<ProductDetail />}/>
             <Route exact path="/" element={<PageInContruction />}/>
         </Routes>
           </Router>

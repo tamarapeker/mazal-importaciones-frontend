@@ -38,7 +38,6 @@
 }
 
 .menuHamGridHeader{
-    color: #fff;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -69,4 +68,9 @@
 
 .linkHeader{
     text-decoration: none;
+}
+
+.menuListCategory{
+    position: absolute !important;
+    top: 9% !important;
 }
