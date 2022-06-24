@@ -1,0 +1,5 @@
+//Define the Actions
+export const GET_CATEGORY_LOADING = 'GET_CATEGORY_LOADING';
+export const GET_CATEGORY_FAIL = 'GET_CATEGORY_FAIL';
+export const GET_CATEGORY_SUCCESS = 'GET_CATEGORY_SUCCESS';
+

@@ -1,16 +1,27 @@
-import './App.css';
+import { useEffect } from 'react';
+import { connect } from "react-redux";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+
+import { GetCategories } from './store/category/categoryActions';
+
 import PageInContruction from './components/pageInContruction/PageInContruction';
 import MainView from './components/MainView/MainView';
 import Subcategory from './components/Subcategory/Subcategory'
 import ProductDetail from './components/ProductDetail/ProductDetail';
 
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes
-} from "react-router-dom";
+import './App.css';
 
-function App() {
+function App(props) {
+
+useEffect(()=>{
+  props.getCategories()
+},[])
+
+useEffect(()=>{
+  console.log(props.category.category)
+},[props.category.loading, props.category.category])
+
+
   return (
     <div className="App">
       <Router>
@@ -25,4 +36,17 @@ function App() {
   );
 }
 
-export default App;
+const mapStateProps = (state) => {
+  return{
+      category: state.category,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return{
+      getCategories: () => dispatch(GetCategories()),
+  }
+}
+
+
+export default connect( mapStateProps, mapDispatchToProps)(App);
