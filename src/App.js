@@ -3,24 +3,17 @@ import { connect } from "react-redux";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 import { GetCategories } from './store/category/categoryActions';
+import {GetProducts} from './store/product/productActions';
 
 import PageInContruction from './components/pageInContruction/PageInContruction';
 import MainView from './components/MainView/MainView';
 import Subcategory from './components/Subcategory/Subcategory'
 import ProductDetail from './components/ProductDetail/ProductDetail';
+import ProductsView from './components/ProductsView/ProductsView';
 
 import './App.css';
 
 function App(props) {
-
-useEffect(()=>{
-  props.getCategories()
-},[])
-
-useEffect(()=>{
-  console.log(props.category.category)
-},[props.category.loading, props.category.category])
-
 
   return (
     <div className="App">
@@ -28,7 +21,8 @@ useEffect(()=>{
         <Routes>
             <Route exact path="/home" element={<MainView />}/>
             <Route exact path="/subcategory/:cateogry" element={<Subcategory />}/>
-            <Route exact path="/product/:subcategory" element={<ProductDetail />}/>
+            <Route exact path="/products/:subcategory" element={<ProductsView />}/>
+            <Route exact path="/productDetail/:idProduct" element={<ProductDetail />}/>
             <Route exact path="/" element={<PageInContruction />}/>
         </Routes>
           </Router>
@@ -39,12 +33,14 @@ useEffect(()=>{
 const mapStateProps = (state) => {
   return{
       category: state.category,
+      products: state.products
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return{
       getCategories: () => dispatch(GetCategories()),
+      getProducts: () => dispatch(GetProducts()),
   }
 }
 

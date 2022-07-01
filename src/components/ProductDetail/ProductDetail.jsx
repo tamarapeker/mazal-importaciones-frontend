@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from "react-router";
+import { connect } from "react-redux";
 import Header from '../Header/Header'
 import bannerCamioneta from '../../images/banner-camioneta.png'
 import {Grid, Card, CardHeader, CardContent, List, ListItem} from '@material-ui/core';
+import {GetProductById} from '../../store/product/productActions'
+import './productDetail.css'
 
-import axios from 'axios';
-import {CONFIG} from '../../config'
 
-const ProductDetail = () => {
+const ProductDetail = (props) => {
 
     let path = useLocation().pathname;
     path =
@@ -17,45 +18,37 @@ const ProductDetail = () => {
     const pathSplit = path.split("/");
     const location = decodeURIComponent(pathSplit[pathSplit.length - 1]);
 
-  const [allProducts, setAllProducts] = useState([])
-  const [products, setProducts] = useState([])
+    const [product, setProduct] = useState({})
 
-
-  const getProducts = async () => {
-    const res = await axios.get(CONFIG.backend+'/products/subcategory/'+location)
-    setProducts(res.data)
-  }
-  
 useEffect(()=>{
-    getProducts()
+    props.getProductById(location)
 },[])
 
-console.log(products)
+useEffect(()=>{
+    if(props.productById.loading == false && props.productById.productById){
+        setProduct(props.productById.productById[0])
+    }
+},[props.productById.loading, props.productById.productById, location])
 
-// useEffect(()=>{
-//     if(allProducts.length > 0){   
-//         const productsFilter = allProducts.filter((product)=>product.subcategory_name == location)
-//         console.log(productsFilter)
-//         setProducts(productsFilter)
-//     }
-// },[allProducts, location])
+console.log(product)
 
 
 
   return (
     <Grid container spacing={0} lg={12}>
         <Grid item lg={12}>
-        {products.length > 0 &&<h3 style={{margin:"10px auto"}}>{products[0].subcategory_name}</h3>}
+        {product.product_name && <h3 style={{margin:"10px auto"}}>{product.product_name}</h3>}
         </Grid>
         <Grid container spacing={2}>
        
-        {products.length > 0 &&
-        products.map((product) =>{
-            return(
+        {product.product_name &&
+            
                 <Grid item lg={4}>
                 <Card>
                     <CardContent>
-                    {product.product_name}
+                    <Grid item lg={12} className='productImageGrid'>
+                    <img src={`data:${"image/png"};base64,${Buffer.from(product.product_image).toString("base64")}`} className='productImage'/>
+                    </Grid>
                         <List>
                             <ListItem>
                                 {product.product_description}
@@ -91,8 +84,8 @@ console.log(products)
                     </CardContent>
                 </Card>
                 </Grid>
-            )
-        })}
+            
+        }
         
         </Grid>
         
@@ -103,4 +96,16 @@ console.log(products)
   )
 }
 
-export default ProductDetail
+const mapStateProps = (state) => {
+    return{
+        productById: state.productById,
+    }
+  }
+  
+  const mapDispatchToProps = (dispatch) => {
+    return{
+        getProductById: (id) => dispatch(GetProductById(id)),
+    }
+  }
+
+export default connect( mapStateProps, mapDispatchToProps)(ProductDetail)
