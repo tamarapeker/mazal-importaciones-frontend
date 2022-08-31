@@ -1,25 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios'
 import {InputBase, IconButton, Typography, Grid, Button,Popper, Grow, Paper, Menu, MenuItem, 
-    ClickAwayListener } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search'
-import WhatsAppIcon from '@material-ui/icons/WhatsApp';
-import { MenuRounded } from '@material-ui/icons';
+    ClickAwayListener } from '@mui/material';
+    import {Search, WhatsApp, MenuRounded, People} from '@mui/icons-material'
 // import logoMazal from '../../images/logo-mazal.png'
 import logoMazal from '../../images/logoMazal.png'
 import './Header.css'
+import { connect } from 'react-redux';
+import { GetCategories } from '../../store/category/categoryActions';
+import { CategoryDefaultStateI } from '../../store/category/categoryReducer';
 
 const dotenv = require('dotenv');
 
 dotenv.config()
 
+interface Props extends StateTypes, dispatchTypes {}
 
-function Header(){
-    const [inputValue, setInputValue] = useState("")
-    const [categories, setCategories] = useState([])
-    const [anchorEl, setAnchorEl] = useState(null);
+const Header: React.FC<Props> = (props): JSX.Element =>{
+    const [inputValue, setInputValue] = useState<any>("")
+    const [categories, setCategories] = useState<any>([])
+    const [anchorEl, setAnchorEl] = useState<any>(null);
     const openMenu = Boolean(anchorEl);
-    const handleClickMenu = (event) => {
+    const handleClickMenu = (event:any) => {
       setAnchorEl(event.currentTarget);
     };
     const handleCloseMenu = () => {
@@ -27,13 +29,12 @@ function Header(){
     };
   
 
-    useEffect(async()=>{
-        const categoriesData = await axios.get(process.env.backend+"/category")
-        setCategories(categoriesData.data)
+    useEffect(()=>{
+        props.getCategories()
     },[])
   
 
-    const handleChange = e =>{
+    const handleChange = (e:any) =>{
         setInputValue(e.target.value)
     }
     
@@ -63,10 +64,10 @@ function Header(){
                     </Typography>
                 </Grid>
                 <Grid item xl={4} lg={4} md={4} sm={12} xs={1} className='contactInfoGridHeader'>
-                    <Typography Typography className='menuOptHeader' variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                    <a href="https://wa.me/5491145376452" target="_blank" className="linkHeader text-dark"><WhatsAppIcon/> 114537-6452</a>
+                    <Typography className='menuOptHeader' variant="h5" component="div" sx={{ flexGrow: 1 }}>
+                    <a href="https://wa.me/5491145376452" target="_blank" className="linkHeader text-dark"><WhatsApp/> 114537-6452</a>
                     </Typography>
-                    <Typography Typography className='menuOptHeader' variant="body1" component="div" sx={{ flexGrow: 1 }}>
+                    <Typography className='menuOptHeader' variant="body1" component="div" sx={{ flexGrow: 1 }}>
                         info@mazalimportaciones.com.ar
                     </Typography>
                 </Grid>
@@ -85,7 +86,7 @@ function Header(){
                         onClick={handleClickMenu}
                     >
                         <MenuRounded fontSize="large" />
-                        <Typography Typography className='ms-2' variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        <Typography className='ms-2' variant="h6" component="div" sx={{ flexGrow: 1 }}>
                          CATEGORÍAS
                     </Typography>
                     </Button>
@@ -107,7 +108,7 @@ function Header(){
                          onClick={handleSearch}
                          className="searchIconHeader"
                          >
-                             <SearchIcon/>
+                             <Search/>
                      </IconButton>
                  </div> 
                 </Grid>
@@ -117,4 +118,25 @@ function Header(){
     )
 }
 
-export default Header;
+interface StateTypes {
+    categories: CategoryDefaultStateI
+  }
+  
+  const mapStateProps = (state:StateTypes) => {
+    return{
+      categories: state.categories,
+    }
+  }
+  
+  interface dispatchTypes {
+    getCategories: () => void;
+  }
+  
+  const mapDispatchToProps = (dispatch:any) => {
+    return{
+        getCategories: () => dispatch(GetCategories()),
+    }
+  }
+  
+
+export default connect( mapStateProps, mapDispatchToProps)(Header)

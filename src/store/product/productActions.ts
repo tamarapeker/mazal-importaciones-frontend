@@ -5,14 +5,14 @@ GET_PRODUCT_ID_FAIL,GET_PRODUCT_ID_LOADING,GET_PRODUCT_ID_SUCCESS} from './produ
 import axios from 'axios'
 import {CONFIG} from '../../config'
 
-export const GetProducts = () => async (dispatch) => {
+export const GetProducts = () => async (dispatch:any) => {
     try {
         dispatch({
             type: GET_PRODUCTS_LOADING
         })
-        let products = []
+        let products:any = []
         for(let i=1;i<=38;i++){
-            const response = await axios.get(CONFIG.backend+'/products/subcategory/'+i)
+            const response:any = await axios.get(CONFIG.backend+'/products/subcategory/'+i)
             products.push(response.data)
         }
         dispatch({
@@ -27,7 +27,7 @@ export const GetProducts = () => async (dispatch) => {
     }
 }   
 
-export const GetProductsForSubcat = (idSubcat) => async (dispatch) => {
+export const GetProductsForSubcat = (idSubcat:any) => async (dispatch:any) => {
     try {
         dispatch({
             type: GET_PRODUCTS_FOR_SUBCAT_LOADING
@@ -45,7 +45,7 @@ export const GetProductsForSubcat = (idSubcat) => async (dispatch) => {
     }
 }   
 
-export const GetProductById = (id) => async (dispatch) => {
+export const GetProductById = (id:any) => async (dispatch:any) => {
     try {
         dispatch({
             type: GET_PRODUCT_ID_LOADING

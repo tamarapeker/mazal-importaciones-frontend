@@ -5,11 +5,14 @@ import Header from '../Header/Header'
 import bannerCamioneta from '../../images/banner-camioneta.png'
 import {Grid, List, ListItem, Link} from '@material-ui/core';
 import {GetSubcatForCat} from '../../store/category/categoryActions'
+import {SubcatForCatDefaultStateI} from '../../store/category/categoryReducer';
 
 import axios from 'axios';
 import {CONFIG} from '../../config'
 
-const Subcategory = (props) => {
+interface Props extends StateTypes, dispatchTypes {}
+
+const Subcategory: React.FC<Props> = (props): JSX.Element => {
 
     let path = useLocation().pathname;
     path =
@@ -17,10 +20,10 @@ const Subcategory = (props) => {
         ? path.substring(0, path.length - 1)
         : path;
     const pathSplit = path.split("/");
-    const location = parseInt(pathSplit[pathSplit.length - 1]);
+    const location:any = parseInt(pathSplit[pathSplit.length - 1]);
     console.log(location)
 
-  const [subcategories, setSubcategories] = useState([])
+  const [subcategories, setSubcategories] = useState<any>([])
   
 useEffect(()=>{
   props.getSubcatForCat(location)
@@ -30,7 +33,7 @@ console.log(props.subcatForCat.subcatForCat)
 
 useEffect(()=>{
     if(props.subcatForCat.loading == false && props.subcatForCat.subcatForCat){   
-        const subcatFilter = props.subcatForCat.subcatForCat.filter((subcat)=>subcat.category_id == location)
+        const subcatFilter = props.subcatForCat.subcatForCat.filter((subcat:any)=>subcat.category_id == location)
         console.log(subcatFilter)
         setSubcategories(subcatFilter)
     }
@@ -43,7 +46,7 @@ useEffect(()=>{
         {/* <Header/>*/}
         <List>
         {subcategories.length > 0 &&
-          subcategories.map((subcategory) => {
+          subcategories.map((subcategory:any) => {
             return (
               <ListItem>
                   <Link href={`/products/${subcategory.subcategory_id}`}>
@@ -60,16 +63,25 @@ useEffect(()=>{
   )
 }
 
+interface StateTypes {
+  subcatForCat: SubcatForCatDefaultStateI
+}
 
-const mapStateProps = (state) => {
+const mapStateProps = (state:StateTypes) => {
   return{
       subcatForCat: state.subcatForCat,
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+interface dispatchTypes {
+  getSubcatForCat: (id:any) => void;
+}
+
+
+
+const mapDispatchToProps = (dispatch:any) => {
   return{
-    getSubcatForCat: (id) => dispatch(GetSubcatForCat(id)),
+    getSubcatForCat: (id:any) => dispatch(GetSubcatForCat(id)),
   }
 }
 

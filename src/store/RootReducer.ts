@@ -3,14 +3,14 @@ import {categoryReducer,subcategoryReducer,categoryByIdReducer,subcatForCatReduc
 import {productsReducer, productsForSubcatReducer, productByIdReducer} from './product/productReducer'
 
 const RootReducer = combineReducers({
-    category: categoryReducer,
-    subcategory: subcategoryReducer,
+    categories: categoryReducer,
+    subcategories: subcategoryReducer,
     categoryById: categoryByIdReducer,
     subcatForCat: subcatForCatReducer,
     subcategoryById: subcategoryByIdReducer,
-    products: productsReducer,
-    productsForSubcat: productsForSubcatReducer,
-    productById: productByIdReducer,
+    // products: productsReducer,
+    // productsForSubcat: productsForSubcatReducer,
+    // productById: productByIdReducer,
 })
 
 export default RootReducer;

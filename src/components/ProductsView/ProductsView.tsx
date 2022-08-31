@@ -8,23 +8,23 @@ import {GetProductsForSubcat} from '../../store/product/productActions'
 import './ProductsView.css'
 
 
-const ProductsView = (props) => {
+const ProductsView = () => {
 
-    let path = useLocation().pathname;
-    path =
-      path.charAt(path.length - 1) === "/"
-        ? path.substring(0, path.length - 1)
-        : path;
-    const pathSplit = path.split("/");
-    const location = decodeURIComponent(pathSplit[pathSplit.length - 1]);
+//     let path = useLocation().pathname;
+//     path =
+//       path.charAt(path.length - 1) === "/"
+//         ? path.substring(0, path.length - 1)
+//         : path;
+//     const pathSplit = path.split("/");
+//     const location = decodeURIComponent(pathSplit[pathSplit.length - 1]);
 
-useEffect(()=>{
-    props.getProductsForSubcat(location)
-},[])
+// useEffect(()=>{
+//     props.getProductsForSubcat(location)
+// },[])
 
   return (
     <Grid container spacing={0} lg={12}>
-        <Grid item lg={12}>
+        {/* <Grid item lg={12}>
         {props.productsForSubcat.loading == false && props.productsForSubcat.productsForSubcat &&<h3 style={{margin:"10px auto"}}>{props.productsForSubcat.productsForSubcat[0].subcategory_name}</h3>}
         </Grid>
         <Grid container spacing={2}>
@@ -47,21 +47,22 @@ useEffect(()=>{
             )
         })}
         
-        </Grid>
+        </Grid> */}
     </Grid>
   )
 }
 
-const mapStateProps = (state) => {
-    return{
-        productsForSubcat: state.productsForSubcat,
-    }
-  }
+// const mapStateProps = (state) => {
+//     return{
+//         productsForSubcat: state.productsForSubcat,
+//     }
+//   }
   
-  const mapDispatchToProps = (dispatch) => {
-    return{
-        getProductsForSubcat: (idSubcat) => dispatch(GetProductsForSubcat(idSubcat)),
-    }
-  }
+//   const mapDispatchToProps = (dispatch) => {
+//     return{
+//         getProductsForSubcat: (idSubcat) => dispatch(GetProductsForSubcat(idSubcat)),
+//     }
+//   }
 
-export default connect( mapStateProps, mapDispatchToProps)(ProductsView)
+//export default connect( mapStateProps, mapDispatchToProps)(ProductsView)
+export default ProductsView

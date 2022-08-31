@@ -8,7 +8,7 @@ import {GetProductById} from '../../store/product/productActions'
 import './productDetail.css'
 
 
-const ProductDetail = (props) => {
+const ProductDetail = () => {
 
     let path = useLocation().pathname;
     path =
@@ -18,25 +18,25 @@ const ProductDetail = (props) => {
     const pathSplit = path.split("/");
     const location = decodeURIComponent(pathSplit[pathSplit.length - 1]);
 
-    const [product, setProduct] = useState({})
+    const [product, setProduct] = useState<any>({})
 
-useEffect(()=>{
-    props.getProductById(location)
-},[])
+// useEffect(()=>{
+//     props.getProductById(location)
+// },[])
 
-useEffect(()=>{
-    if(props.productById.loading == false && props.productById.productById){
-        setProduct(props.productById.productById[0])
-    }
-},[props.productById.loading, props.productById.productById, location])
+// useEffect(()=>{
+//     if(props.productById.loading == false && props.productById.productById){
+//         setProduct(props.productById.productById[0])
+//     }
+// },[props.productById.loading, props.productById.productById, location])
 
-console.log(product)
+// console.log(product)
 
 
 
   return (
     <Grid container spacing={0} lg={12}>
-        <Grid item lg={12}>
+        {/* <Grid item lg={12}>
         {product.product_name && <h3 style={{margin:"10px auto"}}>{product.product_name}</h3>}
         </Grid>
         <Grid container spacing={2}>
@@ -87,7 +87,7 @@ console.log(product)
             
         }
         
-        </Grid>
+        </Grid> */}
         
        
       
@@ -96,16 +96,17 @@ console.log(product)
   )
 }
 
-const mapStateProps = (state) => {
-    return{
-        productById: state.productById,
-    }
-  }
+// const mapStateProps = (state) => {
+//     return{
+//         productById: state.productById,
+//     }
+//   }
   
-  const mapDispatchToProps = (dispatch) => {
-    return{
-        getProductById: (id) => dispatch(GetProductById(id)),
-    }
-  }
+//   const mapDispatchToProps = (dispatch) => {
+//     return{
+//         getProductById: (id) => dispatch(GetProductById(id)),
+//     }
+//   }
 
-export default connect( mapStateProps, mapDispatchToProps)(ProductDetail)
+//export default connect( mapStateProps, mapDispatchToProps)(ProductDetail)
+export default ProductDetail

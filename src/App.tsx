@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect } from 'react';
 import { connect } from "react-redux";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
@@ -12,35 +13,45 @@ import ProductDetail from './components/ProductDetail/ProductDetail';
 import ProductsView from './components/ProductsView/ProductsView';
 
 import './App.css';
+import { CategoryDefaultStateI } from './store/category/categoryReducer';
 
-function App(props) {
+const App: React.FC = ()  => {
 
   return (
     <div className="App">
       <Router>
         <Routes>
-            <Route exact path="/home" element={<MainView />}/>
-            <Route exact path="/subcategory/:cateogry" element={<Subcategory />}/>
-            <Route exact path="/products/:subcategory" element={<ProductsView />}/>
-            <Route exact path="/productDetail/:idProduct" element={<ProductDetail />}/>
-            <Route exact path="/" element={<PageInContruction />}/>
+            <Route path="/home" element={<MainView />}/>
+            <Route path="/subcategory/:cateogry" element={<Subcategory />}/>
+            <Route path="/products/:subcategory" element={<ProductsView />}/>
+            <Route path="/productDetail/:idProduct" element={<ProductDetail />}/>
+            <Route path="/" element={<PageInContruction />}/>
         </Routes>
           </Router>
     </div>
   );
 }
 
-const mapStateProps = (state) => {
+interface StateTypes {
+  categories: CategoryDefaultStateI;
+}
+
+const mapStateProps = (state:StateTypes) => {
   return{
-      category: state.category,
-      products: state.products
+      categories: state.categories,
+      // products: state.products
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+interface dispatchTypes {
+  getCategories: () => void;
+}
+
+
+const mapDispatchToProps = (dispatch:any) => {
   return{
       getCategories: () => dispatch(GetCategories()),
-      getProducts: () => dispatch(GetProducts()),
+      //getProducts: () => dispatch(GetProducts()),
   }
 }
 

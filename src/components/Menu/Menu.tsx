@@ -1,24 +1,28 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {Menu} from '@material-ui/core'
+import {Menu} from '@mui/material'
 
 import './Menu.css'
 
-function Menu (props) {
+interface Props {
+
+}
+
+const Header: React.FC<Props> = (props): JSX.Element => {
     return (
         <Menu
         id="account-menu"
-        anchorEl={anchorEl}
-        open={openMenu}
-        onClose={handleCloseMenu}
+        // anchorEl={anchorEl}
+        open={true}
+        // onClose={handleCloseMenu}
        className="menuListCategory"
         >
-            {
+            {/* {
                 props.categories.length >0 && props.categories.map(category =>{
                     return(
                         <MenuItem onClick={handleCloseMenu}>{category.category_name}</MenuItem>
                     )
                 })
-            }
+            } */}
         </Menu>
     )
 }
